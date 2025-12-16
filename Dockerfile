@@ -6,6 +6,7 @@ FROM --platform=${BUILDPLATFORM} docker.io/library/node:24-trixie-slim@sha256:45
 ARG GIT_BUILD_HASH
 ENV GIT_BUILD_HASH=$GIT_BUILD_HASH
 ENV NODE_ENV=production
+ENV VITE_BUILD_MODE=production
 
 WORKDIR /work/web
 

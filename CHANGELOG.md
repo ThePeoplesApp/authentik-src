@@ -4,10 +4,10 @@
 <!-- For an EXISTING day, append a new `- HH:MM UTC — ...` line at the top of that day's list. -->
 
 ## 2025-12-16
+- 22:58 UTC — Fix frontend build by setting VITE_BUILD_MODE=production in the Dockerfile so Vite generates /web/dist correctly for the TPA image.
 - 21:56 UTC — Make the server Dockerfile prefer a custom `gen-ts-api` client when present, falling back to the published `@goauthentik/api` package when no generated client is available.
 
 ## 2025-12-05
 
 ## 2024-03-26
 - 16:25 UTC — Split the tsconfig file into a base and build variant and document tsconfig `extends` behavior for `compilerOptions.paths` based on the previous web/docs changelog entry.
-
