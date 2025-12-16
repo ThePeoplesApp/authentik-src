@@ -20,10 +20,19 @@ COPY ./package.json /work
 COPY ./web /work/web/
 # TODO: Update this after moving website to docs
 COPY ./website /work/website/
-COPY ./gen-ts-api /work/web/node_modules/@goauthentik/api
+COPY ./gen-ts-api /work/gen-ts-api
+
+# Bootstrap-safe API client handling
+RUN if [ -d "/work/gen-ts-api" ] && [ "$(ls -A /work/gen-ts-api 2>/dev/null)" ]; then \
+      mkdir -p /work/web/node_modules/@goauthentik/api && \
+      cp -r /work/gen-ts-api/* /work/web/node_modules/@goauthentik/api/ ; \
+    else \
+      cd /work/web && npm install @goauthentik/api ; \
+    fi
 
 RUN npm run build && \
     npm run build:sfe
+
 
 # Stage 2: Build go proxy
 FROM --platform=${BUILDPLATFORM} docker.io/library/golang:1.25.5-trixie@sha256:8e8f9c84609b6005af0a4a8227cee53d6226aab1c6dcb22daf5aeeb8b05480e1 AS go-builder
